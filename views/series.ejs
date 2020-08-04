@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+			integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+			integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+		/>
+		<link rel="stylesheet" href="stylesheets/series.css" />
+		<title>Series</title>
+	</head>
+	<body>
+		<!--NAVBAR-->
+		<nav class="navbar justify-content-between">
+			<span class="navbar-brand mb-0 h1">Series</span>
+
+			<a href="/users/log-out"
+				><button type="button" class="btn btn-outline-primary btn-sm logOut">
+					Log Out
+				</button></a
+			>
+		</nav>
+
+		<!--FIN NAVBAR-->
+
+		<!--CONTENU-->
+		<!--SEARCH-->
+
+		<div class="container">
+			<div class="row d-flex justify-content-center">
+				<div class="col-10 col-md-8 col-lg-4">
+					<form action="/search-series" method="POST">
+						<div class="input-group">
+							<input
+								type="text"
+								name="serieFront"
+								class="form-control"
+								placeholder="Serie's Name"
+								aria-label="Enter Serie's Name"
+								aria-describedby="button-addon2"
+							/>
+							<div class="input-group-append">
+								<button
+									class="btn btn-outline-secondary searchButton"
+									type="submit"
+									id="button-addon2"
+								>
+									Search
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<!-- FIN SEARCH-->
+
+			<!-- CARTES-->
+
+			<div class="row d-flex justify-content-center ensembleCartes">
+				<!-- 	<div class="col-10 col-md-6">
+					<div class="card">
+						<img src="images/MjAyMDAyOTllYzQ0YThhOWYxYTdiZjk4ZDVhNzg3YmM2ZjQ3MzE.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+						  <h5 class="card-title">Card title</h5>
+						  <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat cumque nemo, obcaecati reprehenderit autem commodi nulla deserunt dolor asperiores ex dicta quas error nobis at nihil repellendus, possimus numquam est?</p>
+						</div>
+					</div>
+				</div> -->
+
+				<% if(serieList.length == 0){ %>
+				<div
+					class="alert alert-warning alert-dismissible fade show"
+					role="alert"
+				>
+					<strong>Sorry!</strong> No series found. Search for one!
+					<button
+						type="button"
+						class="close"
+						data-dismiss="alert"
+						aria-label="Close"
+					>
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<%}%> <% for (var i=0; i<serieList.length; i++){ var status = ""; var
+				genres = ""; var rating = ""; if(serieList[i].status == "Ended"){ status
+				= "badge-danger"; }else if(serieList[i].status == "Running"){ status =
+				"badge-success"; }else{ status = "badge-warning"; }
+				if(serieList[i].genres == "Action" || "Adventure" || "Crime" || "Drama"
+				|| "Medical" || "Espionage" || "History" ||"War" || "Western" ||
+				"Legal"){ genres = "badge-secondary"; }else if(serieList[i].genres ==
+				"Anime" || "Children" || "Comedy" || "DIY" || "Family" || "Music"){
+				genres = "badge-light"; }else if(serieList[i].genres == "Food" ||
+				"Nature" || "Romance" || "Romance" || "Sports" || "Travel"){ genres =
+				"badge-success"; }else if(serieList[i].genres == "Adult" || "Horror" ||
+				"Mystery" || "Thriller"){ genres = "badge-dark"; }else{ genres =
+				"badge-warning"; } if(serieList[i].rating < 5){ rating =
+				"border-danger"; }else if(serieList[i].rating < 8){ rating =
+				"border-warning"; }else{ rating = "border-success"; }
+				if(!serieList[i].rating){ rating = "border-secondary"; } %>
+
+				<div
+					class="col-12 col-sm-11 col-md-6 col-lg-4 d-flex justify-content-center"
+				>
+					<div class="card" style="width: 18rem;">
+						<img src="<%= serieList[i].img %>" class="card-img-top" alt="..." />
+						<div class="card-body">
+							<h5 class="card-title"><%= nameFormat(serieList[i].name) %></h5>
+							<span class="badge badge-pill badge-primary"
+								><%= serieList[i].langue %></span
+							>
+							<span class="badge badge-pill <%= genres %>"
+								><%= serieList[i].genres %></span
+							>
+							<span class="badge badge-pill <%= status %>"
+								><%= serieList[i].status %></span
+							>
+							<span class="badge badge-pill badge-info"
+								><%= serieList[i].network %></span
+							>
+							<div class="descriptionSerie">
+								<p class="card-text scroll">
+									<%= stringFormat(serieList[i].summary) %>
+								</p>
+							</div>
+
+							<a
+								href="<%= serieList[i].officialSite %>"
+								class="badge badge-light lienSite"
+								>Official <%= nameFormat(serieList[i].name) %> Site</a
+							>
+						</div>
+						<div
+							class="card-footer <%= rating %> d-flex justify-content-center"
+						>
+							<ul class="list-group list-group-horizontal">
+								<li class="list-group-item">
+									<small
+										><i class="fas fa-star"></i> <%= serieList[i].rating
+										%></small
+									>
+								</li>
+
+								<li class="list-group-item">
+									<a
+										class="d-flex justify-content-end suppr"
+										href="/delete-serie?id=<%=serieList[i].id %>"
+									>
+										<i class="fas fa-times-circle"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<% } %>
+			</div>
+
+			<!-- FIN CARTES-->
+		</div>
+
+		<script
+			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+			integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>

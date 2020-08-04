@@ -1,0 +1,95 @@
+body {
+	background-image: url("../images/top-meilleures-series-science-fiction-fantastique-netflix.jpg");
+	max-width: 100%;
+}
+.contenu {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	max-width: 100%;
+	font-family: sans-serif;
+	border-radius: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
+	backdrop-filter: blur(15px);
+	width: 300px;
+	height: 370px;
+	background-color: rgba(0, 0, 0, 0.479);
+}
+
+.signupTitle {
+	animation: fadeInLeft;
+	animation-duration: 1s;
+	color: #ffffff;
+	/* -webkit-text-stroke: 1px black; */
+	font-size: 30px;
+	margin-left: 100px;
+	margin-top: 70px;
+}
+
+i {
+	animation: fadeInRight;
+	animation-duration: 1s;
+	font-size: 15px;
+	color: white;
+}
+
+.inputArea {
+	margin-top: 20px;
+}
+
+.textArea {
+	margin-bottom: 10px;
+}
+
+.textArea input {
+	/* border-radius: 30px; */
+	background: none;
+	border-bottom: 1px solid #079992;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	width: 250px;
+	outline: none;
+	color: white;
+	/* padding: 10px; */
+
+	animation: fadeInRight;
+	animation-duration: 1s;
+}
+
+.buttonSubmit {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 30px;
+}
+
+.buttonSubmit button {
+	border-radius: 30px;
+	width: 70px;
+	outline: none;
+	background: none;
+	border: 1px solid #dadada;
+	color: white;
+	animation: fadeInLeft;
+	animation-duration: 1s;
+}
+
+.registered {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 15px;
+}
+
+.registered a {
+	text-decoration: none;
+	color: white;
+
+	animation: fadeInLeft;
+	animation-duration: 1s;
+}
+
+.fa-arrow-circle-right{
+    color: #079992;
+}
